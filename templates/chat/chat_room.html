@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chat App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #e8def8);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: #5b4b8a;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #d16ba5;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            height: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(91, 75, 138, 0.15);
+        }
+
+        .users {
+            width: 30%;
+            background: #faf7ff;
+            padding: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .users h3 {
+            color: #5b4b8a;
+            margin-top: 0;
+        }
+
+        .user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #5b4b8a;
+            background: white;
+        }
+
+        .user:hover {
+            background: #fce4ec;
+        }
+
+        .chat {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            color: #5b4b8a;
+            font-weight: bold;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fffaff;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            background: #f3e2fd;
+            color: #5b4b8a;
+        }
+
+        .message.me {
+            margin-left: auto;
+            background: #fce4ec;
+        }
+
+        .time {
+            font-size: 11px;
+            opacity: 0.6;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .input-area button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #d16ba5;
+            color: white;
+            cursor: pointer;
+        }
+
+        .empty {
+            text-align: center;
+            color: #999;
+            margin-top: 200px;
+        }
+
+        .unread-badge {
+            background: #d16ba5;
+            color: white;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .ticks {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .ticks.read {
+            color: #2196f3;
+        }
+
+        .message {
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            border: none;
+            background: transparent;
+            color: #8b6fa8;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .delete-menu {
+            display: none;
+            position: absolute;
+            right: 5px;
+            top: 30px;
+            background: white;
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .delete-menu.show {
+            display: block;
+        }
+
+        .delete-menu button {
+            display: block;
+            width: 160px;
+            padding: 10px;
+            border: none;
+            background: white;
+            text-align: left;
+            border-radius: 7px;
+            cursor: pointer;
+            color: #5b4b8a;
+        }
+
+        .delete-menu button:hover {
+            background: #fce4ec;
+        }
+
+        .deleted-message {
+            font-style: italic;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h2>💬 Chat App</h2>
+
+        <div>
+            Hello, {{ request.user.username }} |
+            <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Users -->
+        <div class="users">
+            <h3>Users</h3>
+
+            {% for user in users %}
+            <a href="?user={{ user.id }}" class="user">
+                <span>{{ user.username }}</span>
+
+                {% if user.unread_count > 0 %}
+                <span class="unread-badge">
+                    {{ user.unread_count }}
+                </span>
+                {% endif %}
+            </a>
+            {% empty %}
+            <p>No other users available.</p>
+            {% endfor %}
+        </div>
+
+
+        <!-- Chat -->
+        <div class="chat">
+
+            {% if selected_user %}
+
+            <div class="chat-header">
+                Chat with {{ selected_user.username }}
+            </div>
+
+            <div class="messages" id="messages">
+
+                {% for message in messages %}
+
+                <div class="message {% if message.sender == request.user %}me{% endif %}">
+
+                    {{ message.content }}
+
+                    <span class="time">
+                        {{ message.created_at|date:"H:i" }}
+
+                        {% if message.sender == request.user %}
+                        {% if message.is_read %}
+                        <span class="ticks read">✓✓</span>
+                        {% else %}
+                        <span class="ticks">✓</span>
+                        {% endif %}
+                        {% endif %}
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <form class="input-area" id="messageForm">
+
+                {% csrf_token %}
+
+                <input type="text" id="messageInput" placeholder="Type a message..." required>
+
+                <button type="submit">Send</button>
+
+            </form>
+
+            {% else %}
+
+            <div class="empty">
+                <h2>Select a user 💬</h2>
+                <p>Choose a user from the left to start chatting.</p>
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    {% if selected_user %}
+
+    <script>
+
+        const messageForm = document.getElementById("messageForm");
+        const messageInput = document.getElementById("messageInput");
+        const messagesBox = document.getElementById("messages");
+
+        const receiverId = "{{ selected_user.id }}";
+
+
+        messageForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const content = messageInput.value.trim();
+
+            if (!content) {
+                return;
+            }
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+
+            fetch("{% url 'chat:send_message' %}", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": csrfToken
+                },
+
+                body:
+                    "receiver_id=" + receiverId +
+                    "&content=" + encodeURIComponent(content)
+
+            })
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    if (data.success) {
+
+                        messageInput.value = "";
+
+                        loadMessages();
+
+                    }
+
+                });
+
+        });
+
+
+        function loadMessages() {
+
+            fetch(
+                "{% url 'chat:get_messages' %}?receiver_id=" + receiverId
+            )
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    messagesBox.innerHTML = "";
+
+                    data.messages.forEach(message => {
+
+                        const div = document.createElement("div");
+
+                        div.classList.add("message");
+
+                        if (message.sender === "{{ request.user.username }}") {
+                            div.classList.add("me");
+                        }
+
+                        let tick = "";
+
+                        if (message.sender === "{{ request.user.username }}") {
+
+                            if (message.is_read) {
+                                tick = '<span class="ticks read">✓✓</span>';
+                            } else {
+                                tick = '<span class="ticks">✓</span>';
+                            }
+                        }
+
+
+                        let deleteButton = "";
+
+                        if (message.sender === "{{ request.user.username }}") {
+
+                            deleteButton = `
+                    <button class="delete-btn"
+                        onclick="showDeleteMenu(${message.id})">
+                        ⋮
+                    </button>
+
+                    <div class="delete-menu"
+                        id="delete-menu-${message.id}">
+
+                        <button onclick="deleteForMe(${message.id})">
+                            Delete for me
+                        </button>
+
+                        <button onclick="deleteForEveryone(${message.id})">
+                            Delete for everyone
+                        </button>
+
+                    </div>
+                `;
+
+                        } else {
+
+                            deleteButton = `
+                    <button class="delete-btn"
+                        onclick="showDeleteMenu(${message.id})">
+                        ⋮
+                    </button>
+
+                    <div class="delete-menu"
+                        id="delete-menu-${message.id}">
+
+                        <button onclick="deleteForMe(${message.id})">
+                            Delete for me
+                        </button>
+
+                    </div>
+                `;
+                        }
+
+
+                        let deletedClass = "";
+
+                        if (message.is_deleted) {
+                            deletedClass = "deleted-message";
+                            deleteButton = "";
+                            tick = "";
+                        }
+
+                        div.innerHTML = `
+                            <div class="message-content ${deletedClass}">
+                                ${message.content}
+                            </div>
+
+                            <span class="time">
+                                ${message.created_at}
+                                ${tick}
+                            </span>
+
+                            ${deleteButton}
+                        `;
+
+
+                        messagesBox.appendChild(div);
+
+                    });
+
+                    messagesBox.scrollTop = messagesBox.scrollHeight;
+
+                });
+        }
+
+        function showDeleteMenu(messageId) {
+
+            const menu = document.getElementById(
+                "delete-menu-" + messageId
+            );
+
+            menu.classList.toggle("show");
+        }
+
+
+        function deleteForMe(messageId) {
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+            fetch(
+                `/chat/delete-for-me/${messageId}/`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRFToken": csrfToken
+                    }
+                }
+            )
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.success) {
+                        loadMessages();
+                    }
+
+                });
+        }
+
+
+        function deleteForEveryone(messageId) {
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+            fetch(
+                `/chat/delete-for-everyone/${messageId}/`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRFToken": csrfToken
+                    }
+                }
+            )
+                .then(response => response.json())
+                .then(data => {
+
+                    if (data.success) {
+                        loadMessages();
+                    }
+
+                });
+        }
+
+        // Refresh messages every 3 seconds
+        setInterval(loadMessages, 3000);
+
+    </script>
+
+    {% endif %}
+
+</body>
+
+</html>
