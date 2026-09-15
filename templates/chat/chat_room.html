@@ -222,6 +222,350 @@
             font-style: italic;
             opacity: 0.6;
         }
+
+
+        /* Mobile Responsive Design */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .navbar h2 {
+                font-size: 20px;
+            }
+
+            .navbar div {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 100%;
+                height: calc(100vh - 70px);
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .users {
+                width: 32%;
+                padding: 10px;
+            }
+
+            .users h3 {
+                font-size: 16px;
+            }
+
+            .user {
+                padding: 10px 7px;
+                font-size: 13px;
+            }
+
+            .chat {
+                width: 68%;
+            }
+
+            .chat-header {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+
+            .messages {
+                padding: 12px 8px;
+            }
+
+            .message {
+                max-width: 85%;
+                padding: 9px 12px;
+                font-size: 13px;
+            }
+
+            .input-area {
+                padding: 10px;
+                gap: 6px;
+            }
+
+            .input-area input {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .input-area button {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+
+            .empty {
+                margin-top: 150px;
+                padding: 10px;
+            }
+
+            .empty h2 {
+                font-size: 20px;
+            }
+
+            .empty p {
+                font-size: 13px;
+            }
+        }
+
+
+        .back-btn {
+            display: none;
+            text-decoration: none;
+            color: #5b4b8a;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+
+        /* Mobile Chat Layout */
+
+        @media (max-width: 768px) {
+
+            body {
+                overflow: hidden;
+            }
+
+            .navbar {
+                height: 60px;
+                padding: 10px 15px;
+            }
+
+            .navbar h2 {
+                font-size: 18px;
+            }
+
+            .navbar div {
+                font-size: 11px;
+            }
+
+            .container {
+                width: 100%;
+                height: calc(100vh - 60px);
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .users {
+                width: 100%;
+                border-right: none;
+                padding: 15px;
+            }
+
+            .chat {
+                display: none;
+                width: 100%;
+            }
+
+            /* When a user is selected */
+
+            .container.chat-open .users {
+                display: none;
+            }
+
+            .container.chat-open .chat {
+                display: flex;
+                width: 100%;
+            }
+
+            .container.chat-open .back-btn {
+                display: inline-block;
+            }
+
+            .chat-header {
+                height: 55px;
+                padding: 10px 15px;
+                display: flex;
+                align-items: center;
+            }
+
+            .messages {
+                padding: 12px;
+            }
+
+            .message {
+                max-width: 80%;
+                font-size: 14px;
+                padding: 9px 12px;
+            }
+
+            .input-area {
+                padding: 10px;
+                padding-bottom: 12px;
+            }
+
+            .input-area input {
+                min-width: 0;
+                font-size: 14px;
+            }
+
+            .input-area button {
+                padding: 10px 15px;
+            }
+
+            .delete-menu button {
+                width: 150px;
+            }
+
+        }
+
+        .reply-preview {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: #f3e2fd;
+            border-left: 4px solid #d16ba5;
+            color: #5b4b8a;
+        }
+
+        .reply-preview strong {
+            font-size: 13px;
+        }
+
+        .reply-preview p {
+            margin: 3px 0 0;
+            font-size: 12px;
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .reply-preview button {
+            border: none;
+            background: none;
+            font-size: 22px;
+            color: #8b6fa8;
+            cursor: pointer;
+        }
+
+        .replied-message {
+            background: #f3e2fd;
+            border-left: 3px solid #d16ba5;
+            padding: 6px 8px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #5b4b8a;
+        }
+
+        .replied-message strong {
+            display: block;
+            font-size: 11px;
+        }
+
+        .replied-message span {
+            display: block;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .user-link {
+            flex: 1;
+            text-decoration: none;
+            color: #5b4b8a;
+            padding: 12px;
+        }
+
+        .user-menu-btn {
+            border: none;
+            background: transparent;
+            color: #8b6fa8;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .user-menu {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 45px;
+            background: white;
+            padding: 6px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            z-index: 20;
+        }
+
+        .user-menu.show {
+            display: block;
+        }
+
+        .user-menu button {
+            border: none;
+            background: transparent;
+            padding: 9px 12px;
+            color: #d16ba5;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .danger-btn {
+            color: #d9534f !important;
+        }
+
+        .reply-btn {
+            border: none;
+            background: #f3e2fd;
+            color: #8b6fa8;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .reply-btn:hover {
+            background: #e8d4f5;
+        }
+
+        @media (max-width: 768px) {
+
+            .user-menu {
+                right: 5px;
+                top: 40px;
+                min-width: 160px;
+            }
+
+            .user-menu button {
+                width: 100%;
+                padding: 12px;
+                font-size: 14px;
+                text-align: left;
+            }
+
+            .user-menu-btn {
+                font-size: 24px;
+                padding: 8px 12px;
+            }
+
+            .reply-btn {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .reply-preview {
+                padding: 8px 12px;
+            }
+
+            .reply-preview p {
+                max-width: 220px;
+            }
+        }
     </style>
 </head>
 
@@ -236,27 +580,43 @@
         </div>
     </div>
 
-    <div class="container">
-
-        <!-- Users -->
+    <div class="container {% if selected_user %}chat-open{% endif %}">
         <div class="users">
             <h3>Users</h3>
 
             {% for user in users %}
-            <a href="?user={{ user.id }}" class="user">
-                <span>{{ user.username }}</span>
 
-                {% if user.unread_count > 0 %}
-                <span class="unread-badge">
-                    {{ user.unread_count }}
-                </span>
-                {% endif %}
-            </a>
-            {% empty %}
-            <p>No other users available.</p>
+            <div class="user">
+
+                <a href="?user={{ user.id }}" class="user-link">
+                    <span>{{ user.username }}</span>
+
+                    {% if user.unread_count > 0 %}
+                    <span class="unread-badge">
+                        {{ user.unread_count }}
+                    </span>
+                    {% endif %}
+                </a>
+
+                <button class="user-menu-btn" type="button" data-user-id="{{ user.id }}"
+                    onclick="showUserMenu(event, this.dataset.userId)">
+                    ⋮
+                </button>
+
+                <div class="user-menu" id="user-menu-{{ user.id }}">
+
+
+                    <button type="button" class="danger-btn delete-user-btn" data-user-id="{{ user.id }}">
+                        Delete permanently
+                    </button>
+
+                </div>
+
+            </div>
+
             {% endfor %}
-        </div>
 
+        </div>
 
         <!-- Chat -->
         <div class="chat">
@@ -264,7 +624,15 @@
             {% if selected_user %}
 
             <div class="chat-header">
-                Chat with {{ selected_user.username }}
+
+                <a href="{% url 'chat:index' %}" class="back-btn">
+                    ←
+                </a>
+
+                <span>
+                    Chat with {{ selected_user.username }}
+                </span>
+
             </div>
 
             <div class="messages" id="messages">
@@ -294,14 +662,19 @@
             </div>
 
 
+            <div id="replyPreview" class="reply-preview">
+                <div>
+                    <strong id="replyUser"></strong>
+                    <p id="replyText"></p>
+                </div>
+
+                <button type="button" onclick="cancelReply()">×</button>
+            </div>
+
             <form class="input-area" id="messageForm">
-
                 {% csrf_token %}
-
                 <input type="text" id="messageInput" placeholder="Type a message..." required>
-
                 <button type="submit">Send</button>
-
             </form>
 
             {% else %}
@@ -327,6 +700,16 @@
         const messagesBox = document.getElementById("messages");
 
         const receiverId = "{{ selected_user.id }}";
+        let replyToId = null;
+        let messageStore = {};
+
+
+        document.querySelectorAll(".delete-user-btn").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const userId = this.dataset.userId;
+                deleteUserPermanently(userId);
+            });
+        });
 
 
         messageForm.addEventListener("submit", function (event) {
@@ -353,9 +736,9 @@
                     "X-CSRFToken": csrfToken
                 },
 
-                body:
-                    "receiver_id=" + receiverId +
-                    "&content=" + encodeURIComponent(content)
+                body: "receiver_id=" + receiverId +
+                    "&content=" + encodeURIComponent(content) +
+                    "&replied_to_id=" + (replyToId || "")
 
             })
 
@@ -366,6 +749,7 @@
                     if (data.success) {
 
                         messageInput.value = "";
+                        cancelReply();
 
                         loadMessages();
 
@@ -390,6 +774,8 @@
 
                     data.messages.forEach(message => {
 
+                        messageStore[message.id] = message;
+
                         const div = document.createElement("div");
 
                         div.classList.add("message");
@@ -410,8 +796,13 @@
                         }
 
 
-                        let deleteButton = "";
+                        let replyButton = `
+                            <button class="reply-btn" onclick="startReply(${message.id})">
+                                ↩ Reply
+                            </button>
+                        `;
 
+                        let deleteButton = "";
                         if (message.sender === "{{ request.user.username }}") {
 
                             deleteButton = `
@@ -462,16 +853,22 @@
                             tick = "";
                         }
 
+                        let replyHtml = "";
+
+                        if (message.replied_to) {
+                            replyHtml = `
+                                <div class="replied-message">
+                                    <strong>${message.replied_to.sender}</strong>
+                                    <span>${message.replied_to.content}</span>
+                                </div>
+                            `;
+                        }
+
                         div.innerHTML = `
-                            <div class="message-content ${deletedClass}">
-                                ${message.content}
-                            </div>
-
-                            <span class="time">
-                                ${message.created_at}
-                                ${tick}
-                            </span>
-
+                            ${replyHtml}
+                            <div class="message-content">${message.content}</div>
+                            <span class="time">${message.created_at}${tick}</span>
+                            ${replyButton}
                             ${deleteButton}
                         `;
 
@@ -545,6 +942,103 @@
                         loadMessages();
                     }
 
+                });
+        }
+
+
+        function startReply(messageId) {
+            const message = messageStore[messageId];
+
+            if (!message) return;
+
+            replyToId = messageId;
+
+            document.getElementById("replyUser").textContent =
+                "Replying to " + message.sender;
+
+            document.getElementById("replyText").textContent =
+                message.content;
+
+            document.getElementById("replyPreview").style.display = "flex";
+
+            document.getElementById("messageInput").focus();
+        }
+
+        function cancelReply() {
+            replyToId = null;
+
+            document.getElementById("replyPreview").style.display = "none";
+            document.getElementById("replyUser").textContent = "";
+            document.getElementById("replyText").textContent = "";
+        }
+
+        function showUserMenu(event, userId) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const menu = document.getElementById("user-menu-" + userId);
+
+            // Close other menus
+            document.querySelectorAll(".user-menu").forEach(function (item) {
+                item.classList.remove("show");
+            });
+
+            menu.classList.toggle("show");
+        }
+
+
+        function removeUser(userId) {
+            if (!confirm("Remove this user from your chats?")) {
+                return;
+            }
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+            fetch(`/chat/remove-user/${userId}/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                });
+        }
+
+
+
+        function deleteUserPermanently(userId) {
+            const confirmDelete = confirm(
+                "Are you sure? This will permanently delete the user and all their messages."
+            );
+
+            if (!confirmDelete) {
+                return;
+            }
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+            fetch(`/chat/delete-user-permanently/${userId}/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("User deleted permanently.");
+                        location.reload();
+                    } else {
+                        alert(data.error);
+                    }
                 });
         }
 

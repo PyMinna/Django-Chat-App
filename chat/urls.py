@@ -21,4 +21,10 @@ urlpatterns = [
         views.delete_for_everyone,
         name='delete_for_everyone'
     ),
+
+    path(
+    'delete-user-permanently/<int:user_id>/',
+    views.delete_user_permanently,
+    name='delete_user_permanently'
+    ),
 ]
