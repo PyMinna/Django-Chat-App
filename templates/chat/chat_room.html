@@ -415,8 +415,8 @@
         @media (max-width: 768px) {
 
             .container.chat-open {
+                position: relative;
                 height: calc(100vh - 60px);
-                display: flex;
             }
 
             .container.chat-open .chat {
@@ -424,29 +424,35 @@
                 flex-direction: column;
                 width: 100%;
                 height: 100%;
-                min-height: 0;
+                position: relative;
             }
 
             .container.chat-open .messages {
                 flex: 1;
                 min-height: 0;
                 overflow-y: auto;
+                padding-bottom: 80px;
             }
 
             .container.chat-open .input-area {
-                display: flex;
-                flex-shrink: 0;
+                position: absolute;
+                left: 0;
+                bottom: 0;
                 width: 100%;
-                box-sizing: border-box;
+                display: flex;
+                gap: 6px;
                 padding: 10px;
                 background: white;
+                border-top: 1px solid #eee;
+                z-index: 50;
             }
 
             .container.chat-open .input-area input {
                 flex: 1;
                 min-width: 0;
                 height: 42px;
-                box-sizing: border-box;
+                padding: 10px;
+                font-size: 14px;
             }
 
             .container.chat-open .input-area button {
