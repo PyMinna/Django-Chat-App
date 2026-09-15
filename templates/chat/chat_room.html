@@ -638,6 +638,96 @@
             .empty p {
                 font-size: 13px;
             }
+
+            .mobile-notification-setting {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 13px;
+            }
+
+            #notificationToggle {
+                border: none;
+                padding: 5px 10px;
+                border-radius: 15px;
+                background: #d16ba5;
+                color: white;
+                cursor: pointer;
+                font-size: 11px;
+            }
+
+            @media (min-width: 769px) {
+                .mobile-notification-setting {
+                    display: none;
+                }
+            }
+
+            .mobile-notification {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 10px;
+                right: 10px;
+                z-index: 9999;
+
+                background: white;
+                border-radius: 15px;
+                padding: 12px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+
+                align-items: center;
+                gap: 10px;
+
+                animation: notificationSlide 0.3s ease;
+            }
+
+            .mobile-notification.show {
+                display: flex;
+            }
+
+            .notification-icon {
+                font-size: 25px;
+            }
+
+            .notification-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .notification-content strong {
+                display: block;
+                font-size: 14px;
+                color: #5b4b8a;
+            }
+
+            .notification-content p {
+                margin: 3px 0 0;
+                font-size: 12px;
+                color: #777;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .mobile-notification button {
+                border: none;
+                background: transparent;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            @keyframes notificationSlide {
+                from {
+                    transform: translateY(-100px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
         }
     </style>
 </head>
@@ -646,6 +736,14 @@
 
     <div class="navbar">
         <h2>💬 Chat App</h2>
+
+        <div class="mobile-notification-setting">
+            🔔
+            <span>Notifications</span>
+            <button type="button" id="notificationToggle">
+                ON
+            </button>
+        </div>
 
         <div>
             Hello, {{ request.user.username }} |
@@ -767,6 +865,17 @@
 
     </div>
 
+    <div id="mobileNotification" class="mobile-notification">
+        <div class="notification-icon">💬</div>
+
+        <div class="notification-content">
+            <strong id="notificationSender"></strong>
+            <p id="notificationMessage"></p>
+        </div>
+
+        <button type="button" onclick="closeNotification()">×</button>
+    </div>
+
 
     {% if selected_user %}
 
@@ -849,11 +958,18 @@
 
                     messagesBox.innerHTML = "";
 
+                    const oldMessageIds = new Set(
+                        Array.from(document.querySelectorAll(".message[data-message-id]"))
+                            .map(element => element.dataset.messageId)
+                    );
+
                     data.messages.forEach(message => {
 
                         messageStore[message.id] = message;
 
                         const div = document.createElement("div");
+
+                        div.dataset.messageId = message.id;
 
                         div.classList.add("message");
 
@@ -1142,18 +1258,97 @@
                     }
                 });
         }
-  
-    document.addEventListener("click", function () {
-    document.querySelectorAll(".user-menu").forEach(function (menu) {
-    menu.classList.remove("show");
-    });
-    });
 
-    document.querySelectorAll(".user-menu").forEach(function (menu) {
-    menu.addEventListener("click", function (event) {
-    event.stopPropagation();
-    });
-    });
+        document.addEventListener("click", function () {
+            document.querySelectorAll(".user-menu").forEach(function (menu) {
+                menu.classList.remove("show");
+            });
+        });
+
+        document.querySelectorAll(".user-menu").forEach(function (menu) {
+            menu.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+
+    <script>
+        const notificationToggle = document.getElementById("notificationToggle");
+
+        if (notificationToggle) {
+
+            let notificationsEnabled =
+                localStorage.getItem("notificationsEnabled");
+
+            if (notificationsEnabled === null) {
+                notificationsEnabled = "true";
+                localStorage.setItem("notificationsEnabled", "true");
+            }
+
+            function updateNotificationButton() {
+                if (notificationsEnabled === "true") {
+                    notificationToggle.textContent = "ON";
+                } else {
+                    notificationToggle.textContent = "OFF";
+                }
+            }
+
+            updateNotificationButton();
+
+            notificationToggle.addEventListener("click", function () {
+
+                if (notificationsEnabled === "true") {
+                    notificationsEnabled = "false";
+                } else {
+                    notificationsEnabled = "true";
+                }
+
+                localStorage.setItem(
+                    "notificationsEnabled",
+                    notificationsEnabled
+                );
+
+                updateNotificationButton();
+            });
+        }
+    </script>
+
+    <script>
+        function showNotification(sender, message) {
+
+            // Only work on mobile
+            if (window.innerWidth > 768) {
+                return;
+            }
+
+            // Check ON/OFF setting
+            const enabled =
+                localStorage.getItem("notificationsEnabled");
+
+            if (enabled !== "true") {
+                return;
+            }
+
+            document.getElementById("notificationSender").textContent = sender;
+            document.getElementById("notificationMessage").textContent = message;
+
+            document.getElementById("mobileNotification")
+                .classList.add("show");
+
+            setTimeout(function () {
+                closeNotification();
+            }, 5000);
+        }
+
+
+        function closeNotification() {
+            const notification =
+                document.getElementById("mobileNotification");
+
+            if (notification) {
+                notification.classList.remove("show");
+            }
+        }
     </script>
 
 </body>
