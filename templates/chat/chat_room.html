@@ -224,93 +224,6 @@
         }
 
 
-        /* Mobile Responsive Design */
-
-        @media (max-width: 768px) {
-
-            .navbar {
-                padding: 12px 15px;
-            }
-
-            .navbar h2 {
-                font-size: 20px;
-            }
-
-            .navbar div {
-                font-size: 12px;
-            }
-
-            .container {
-                width: 100%;
-                height: calc(100vh - 70px);
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            .users {
-                width: 32%;
-                padding: 10px;
-            }
-
-            .users h3 {
-                font-size: 16px;
-            }
-
-            .user {
-                padding: 10px 7px;
-                font-size: 13px;
-            }
-
-            .chat {
-                width: 68%;
-            }
-
-            .chat-header {
-                padding: 15px 10px;
-                font-size: 14px;
-            }
-
-            .messages {
-                padding: 12px 8px;
-            }
-
-            .message {
-                max-width: 85%;
-                padding: 9px 12px;
-                font-size: 13px;
-            }
-
-            .input-area {
-                padding: 10px;
-                gap: 6px;
-            }
-
-            .input-area input {
-                padding: 10px;
-                font-size: 13px;
-            }
-
-            .input-area button {
-                padding: 10px 14px;
-                font-size: 13px;
-            }
-
-            .empty {
-                margin-top: 150px;
-                padding: 10px;
-            }
-
-            .empty h2 {
-                font-size: 20px;
-            }
-
-            .empty p {
-                font-size: 13px;
-            }
-        }
-
-
         .back-btn {
             display: none;
             text-decoration: none;
@@ -320,148 +233,6 @@
         }
 
 
-        /* Mobile Chat Layout */
-
-        @media (max-width: 768px) {
-
-            body {
-                overflow: hidden;
-            }
-
-            .navbar {
-                height: 60px;
-                padding: 10px 15px;
-            }
-
-            .navbar h2 {
-                font-size: 18px;
-            }
-
-            .navbar div {
-                font-size: 11px;
-            }
-
-            .container {
-                width: 100%;
-                height: calc(100vh - 60px);
-                margin: 0;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            .users {
-                width: 100%;
-                border-right: none;
-                padding: 15px;
-            }
-
-            .chat {
-                display: none;
-                width: 100%;
-            }
-
-            /* When a user is selected */
-
-            .container.chat-open .users {
-                display: none;
-            }
-
-            .container.chat-open .chat {
-                display: flex;
-                width: 100%;
-            }
-
-            .container.chat-open .back-btn {
-                display: inline-block;
-            }
-
-            .chat-header {
-                height: 55px;
-                padding: 10px 15px;
-                display: flex;
-                align-items: center;
-            }
-
-            .messages {
-                padding: 12px;
-            }
-
-            .message {
-                max-width: 80%;
-                font-size: 14px;
-                padding: 9px 12px;
-            }
-
-            .input-area {
-                padding: 10px;
-                padding-bottom: 12px;
-            }
-
-            .input-area input {
-                min-width: 0;
-                font-size: 14px;
-            }
-
-            .input-area button {
-                padding: 10px 15px;
-            }
-
-            .delete-menu button {
-                width: 150px;
-            }
-
-        }
-
-        @media (max-width: 768px) {
-
-            .container.chat-open {
-                position: relative;
-                height: calc(100vh - 60px);
-            }
-
-            .container.chat-open .chat {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                height: 100%;
-                position: relative;
-            }
-
-            .container.chat-open .messages {
-                flex: 1;
-                min-height: 0;
-                overflow-y: auto;
-                padding-bottom: 80px;
-            }
-
-            .container.chat-open .input-area {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                display: flex;
-                gap: 6px;
-                padding: 10px;
-                background: white;
-                border-top: 1px solid #eee;
-                z-index: 50;
-            }
-
-            .container.chat-open .input-area input {
-                flex: 1;
-                min-width: 0;
-                height: 42px;
-                padding: 10px;
-                font-size: 14px;
-            }
-
-            .container.chat-open .input-area button {
-                display: block;
-                flex-shrink: 0;
-                height: 42px;
-                padding: 0 15px;
-            }
-        }
 
         .reply-preview {
             display: none;
@@ -584,37 +355,288 @@
             background: #e8d4f5;
         }
 
+
+        /* =====================================
+   MOBILE VIEW
+   ===================================== */
+
         @media (max-width: 768px) {
 
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            /* Navbar */
+            .navbar {
+                width: 100%;
+                height: 60px;
+                padding: 10px 15px;
+                box-sizing: border-box;
+            }
+
+            .navbar h2 {
+                font-size: 18px;
+                margin: 0;
+            }
+
+            .navbar div {
+                font-size: 11px;
+            }
+
+            /* Main container */
+            .container {
+                width: 100%;
+                height: calc(100vh - 60px);
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                display: flex;
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* =========================
+       USER LIST
+       ========================= */
+
+            .users {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+                border-right: none;
+                overflow-y: auto;
+                flex-shrink: 0;
+            }
+
+            .users h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .user {
+                width: 100%;
+                min-height: 55px;
+                box-sizing: border-box;
+                padding: 8px;
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+            .user-link {
+                flex: 1;
+                min-width: 0;
+                padding: 10px;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .user-menu-btn {
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                font-size: 22px;
+                flex-shrink: 0;
+            }
+
             .user-menu {
+                position: absolute;
                 right: 5px;
-                top: 40px;
+                top: 48px;
+                z-index: 1000;
                 min-width: 160px;
             }
 
             .user-menu button {
                 width: 100%;
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            /* =========================
+       CHAT
+       ========================= */
+
+            .chat {
+                display: none;
+                width: 100%;
+                height: 100%;
+                min-width: 0;
+                flex-direction: column;
+                position: relative;
+                overflow: hidden;
+                background: white;
+            }
+
+            /* When chat is opened */
+            .container.chat-open .users {
+                display: none;
+            }
+
+            .container.chat-open .chat {
+                display: flex;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* =========================
+       CHAT HEADER
+       ========================= */
+
+            .chat-header {
+                width: 100%;
+                height: 55px;
+                min-height: 55px;
+                box-sizing: border-box;
+                padding: 10px 15px;
+                display: flex;
+                align-items: center;
+                flex-shrink: 0;
+                font-size: 15px;
+            }
+
+            .back-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 35px;
+                height: 35px;
+                margin-right: 8px;
+                font-size: 25px;
+            }
+
+            /* =========================
+       MESSAGES
+       ========================= */
+
+            .messages {
+                width: 100%;
+                flex: 1;
+                min-height: 0;
+                box-sizing: border-box;
                 padding: 12px;
+                padding-bottom: 150px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .message {
+                max-width: 80%;
+                padding: 9px 12px;
+                margin-bottom: 10px;
                 font-size: 14px;
-                text-align: left;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
 
-            .user-menu-btn {
-                font-size: 24px;
+            .message-content {
+                max-width: 100%;
+                word-break: break-word;
+            }
+
+            .time {
+                font-size: 10px;
+            }
+
+            /* =========================
+       REPLY PREVIEW
+       ========================= */
+
+            .container.chat-open .reply-preview {
+                position: fixed;
+                left: 0;
+                bottom: 62px;
+                width: 100%;
+                box-sizing: border-box;
+                z-index: 90;
                 padding: 8px 12px;
+                background: white;
             }
 
-            .reply-btn {
-                padding: 6px 10px;
-                font-size: 11px;
+            /* =========================
+       MESSAGE INPUT
+       ========================= */
+
+            .container.chat-open .input-area {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 62px;
+                box-sizing: border-box;
+
+                display: flex;
+                align-items: center;
+
+                gap: 7px;
+                padding: 10px;
+
+                background: white;
+                border-top: 1px solid #ddd;
+
+                z-index: 100;
             }
 
-            .reply-preview {
-                padding: 8px 12px;
+            .container.chat-open .input-area input {
+                flex: 1;
+                width: auto;
+                min-width: 0;
+                height: 42px;
+                box-sizing: border-box;
+                padding: 10px 12px;
+                font-size: 14px;
             }
 
-            .reply-preview p {
-                max-width: 220px;
+            .container.chat-open .input-area button {
+                display: block;
+                width: auto;
+                min-width: 65px;
+                height: 42px;
+                flex-shrink: 0;
+                padding: 0 14px;
+                font-size: 14px;
+            }
+
+            /* =========================
+       MESSAGE DELETE MENU
+       ========================= */
+
+            .delete-menu {
+                z-index: 200;
+            }
+
+            .delete-menu button {
+                width: 150px;
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            /* =========================
+       EMPTY SCREEN
+       ========================= */
+
+            .empty {
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 120px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .empty h2 {
+                font-size: 20px;
+            }
+
+            .empty p {
+                font-size: 13px;
             }
         }
     </style>
@@ -632,6 +654,9 @@
     </div>
 
     <div class="container {% if selected_user %}chat-open{% endif %}">
+        <form style="display:none;">
+            {% csrf_token %}
+        </form>
         <div class="users">
             <h3>Users</h3>
 
@@ -657,7 +682,8 @@
                 <div class="user-menu" id="user-menu-{{ user.id }}">
 
 
-                    <button type="button" class="danger-btn delete-user-btn" data-user-id="{{ user.id }}">
+                    <button type="button" class="danger-btn delete-user-btn" data-user-id="{{ user.id }}"
+                        onclick="deleteUserPermanently(this.dataset.userId)">
                         Delete permanently
                     </button>
 
@@ -1023,44 +1049,6 @@
             document.getElementById("replyText").textContent = "";
         }
 
-        function showUserMenu(event, userId) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            const menu = document.getElementById("user-menu-" + userId);
-
-            // Close other menus
-            document.querySelectorAll(".user-menu").forEach(function (item) {
-                item.classList.remove("show");
-            });
-
-            menu.classList.toggle("show");
-        }
-
-
-        function removeUser(userId) {
-            if (!confirm("Remove this user from your chats?")) {
-                return;
-            }
-
-            const csrfToken = document.querySelector(
-                '[name=csrfmiddlewaretoken]'
-            ).value;
-
-            fetch(`/chat/remove-user/${userId}/`, {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": csrfToken
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    }
-                });
-        }
-
 
 
         function deleteUserPermanently(userId) {
@@ -1107,8 +1095,66 @@
 
 
     </script>
-
     {% endif %}
+
+    <script>
+        function showUserMenu(event, userId) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            document.querySelectorAll(".user-menu").forEach(function (menu) {
+                menu.classList.remove("show");
+            });
+
+            const menu = document.getElementById("user-menu-" + userId);
+
+            if (menu) {
+                menu.classList.add("show");
+            }
+        }
+
+        function deleteUserPermanently(userId) {
+            const confirmDelete = confirm(
+                "Are you sure? This will permanently delete the user and all their messages."
+            );
+
+            if (!confirmDelete) {
+                return;
+            }
+
+            const csrfToken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+            fetch(`/chat/delete-user-permanently/${userId}/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("User deleted permanently.");
+                        location.reload();
+                    } else {
+                        alert(data.error);
+                    }
+                });
+        }
+  
+    document.addEventListener("click", function () {
+    document.querySelectorAll(".user-menu").forEach(function (menu) {
+    menu.classList.remove("show");
+    });
+    });
+
+    document.querySelectorAll(".user-menu").forEach(function (menu) {
+    menu.addEventListener("click", function (event) {
+    event.stopPropagation();
+    });
+    });
+    </script>
 
 </body>
 
