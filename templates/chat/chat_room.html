@@ -412,6 +412,51 @@
 
         }
 
+        @media (max-width: 768px) {
+
+            .container.chat-open {
+                height: calc(100vh - 60px);
+                display: flex;
+            }
+
+            .container.chat-open .chat {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+            }
+
+            .container.chat-open .messages {
+                flex: 1;
+                min-height: 0;
+                overflow-y: auto;
+            }
+
+            .container.chat-open .input-area {
+                display: flex;
+                flex-shrink: 0;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                background: white;
+            }
+
+            .container.chat-open .input-area input {
+                flex: 1;
+                min-width: 0;
+                height: 42px;
+                box-sizing: border-box;
+            }
+
+            .container.chat-open .input-area button {
+                display: block;
+                flex-shrink: 0;
+                height: 42px;
+                padding: 0 15px;
+            }
+        }
+
         .reply-preview {
             display: none;
             align-items: center;
@@ -1042,7 +1087,18 @@
                 });
         }
 
- 
+
+        document.querySelectorAll(".user-link").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                document.querySelector(".container").classList.add("chat-open");
+
+            });
+
+        });
+
+
 
     </script>
 
